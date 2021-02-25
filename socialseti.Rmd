@@ -12,7 +12,58 @@ library(readr)
 library(readxl)
 ```
 
+# Figure 1
+
 ```{r}
 media <- read_xlsx("media_sources.xlsx")
+```
+
+```{r}
+ggplot(media, aes(x = Date, y = Value, color = Media)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Q: Where Do You Most Often Learn About National and Global News?",
+       subtitle = "Data from Levada Center",
+       caption = "Respondents were offered a card and could choose more than one answer.",
+       y = "Value (Percent of Respondents)")
+
+ggsave(filename = "fig1.png")
+```
+
+# Figure 2
+
+```{r}
+frequency <- read_xlsx("frequency.xlsx")
+
+frequency <- frequency %>%
+  mutate(Date = fct_relevel(Date, "January of 2021", "March of 2020", "March of 2019", "March of 2018", "December of 2017")) %>%
+  mutate(Frequency = fct_relevel(Frequency, "Difficulty Answering", "Never", "Once a week or less", "A few times a week", "Daily/practically daily"))
+```
+
+```{r}
+ggplot(frequency, aes(x = Date, y = `Percent of Respondents`, fill = Frequency)) +
+  geom_col() +
+  coord_flip() +
+  labs(title = "Q: Do You Visit Social Media Sites on the Internet? If So, How Often?",
+       subtitle = "Data from Levada Center")
+
+ggsave(filename = "fig2.png")
+```
+
+# Figure 3
+
+```{r}
+social <- read_xlsx("social_media.xlsx")
+```
+
+```{r}
+ggplot(social, aes(x = Date, y = Value, color = Media)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Q: What Social Media Sites Do You Visit?", 
+       subtitle = "Data from Levada Center (in percentage of social media users)",
+       y = "Value (Pct. of Social Media Users)")
+
+ggsave(filename = "fig3.png")
 ```
 
