@@ -1,0 +1,18 @@
+---
+title: "Social Media"
+author: "Daniel Shapiro"
+date: "2/25/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(readr)
+library(readxl)
+```
+
+```{r}
+media <- read_xlsx("media_sources.xlsx")
+```
+
